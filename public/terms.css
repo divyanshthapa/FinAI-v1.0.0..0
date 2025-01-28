@@ -1,0 +1,154 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background: #333;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    font-weight: 700;
+}
+
+p {
+    margin: 0.5rem 0;
+}
+
+/* Header Styles */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    background: #222;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 250px;
+    height: calc(100% - 80px);
+    background: #444;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar nav ul li {
+    margin: 1rem 0;
+}
+
+.sidebar nav ul li a {
+    color: #fff;
+    font-size: 1rem;
+    text-transform: uppercase;
+    padding: 0.5rem;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #666;
+    border-radius: 5px;
+}
+
+/* Main Content Styles */
+.content {
+    margin-left: 260px;
+    padding: 2rem;
+    background: #333;
+    min-height: 100vh;
+    color: #ddd;
+}
+
+.content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.content p {
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.content ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+.content ul li {
+    margin: 0.5rem 0;
+}
+
+/* Footer Styles */
+footer {
+    background: #222;
+    color: #aaa;
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid #444;
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .content {
+        margin-left: 210px;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 0.5rem 1rem;
+    }
+
+    .sidebar {
+        width: 180px;
+    }
+
+    .content {
+        margin-left: 190px;
+        padding: 1rem;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+}

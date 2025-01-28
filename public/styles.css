@@ -1,0 +1,441 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background: #333;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    font-weight: 700;
+}
+
+p {
+    margin: 0.5rem 0;
+}
+
+section {
+    width: 100%;
+}
+
+/* Sliding Down Animation */
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Pop-up Animation for Features */
+@keyframes popUp {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Header Styles */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    z-index: 1000;
+}
+
+/* Logo Section */
+header .top-left {
+    flex: 1;
+}
+
+header .logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+header .logo:hover {
+    color: #ccc;
+}
+
+/* Oval Container (About, Features, Community links) */
+.oval-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 20px; /* Positioned at top */
+    left: 40%;
+    transform: translateX(-50%); /* Center horizontally */
+    background-color: #000;
+    border-radius: 50px;
+    padding: 0.3rem;
+    animation: slideDown 1s ease-out forwards;
+}
+
+.oval-link {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    transition: background-color 0.3s;
+    margin: 0 10px;
+}
+
+.oval-link:hover {
+    background-color: #444;
+}
+
+/* Get Started Button */
+.top-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn-primary {
+    background-color: #000;
+    color: #fff;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #444;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    height: 100vh;
+    background: url('pexels-thomas-svensson-1505611-3074526.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    z-index: 1;
+}
+
+/* Slide-Up and Fade-Out Animation */
+@keyframes slideUpFadeOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0); /* Initial position */
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px); /* Slide up and fade out */
+    }
+}
+
+/* Style for Welcome Text */
+.hero-title {
+    font-size: 4rem;
+    margin-top: 4cm;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+    font-weight: 700;
+    line-height: 1.2;
+    opacity: 1; /* Initially visible */
+    transform: translateY(0); /* Start at normal position */
+    transition: all 1s ease-out; /* Smooth transition for slide-up */
+}
+
+
+
+.hero-subtitle {
+    font-size: 1.4rem;
+    color: #fff;
+    max-width: 800px;
+    margin-bottom: 2rem;
+    animation: slideDown 1.5s ease-out 0.5s forwards;
+}
+
+/* Features Section */
+.features {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 4rem 2rem;
+    text-align: center;
+    background: url('ai.png') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    margin-top: -2rem;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text contrast */
+}
+
+.features h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+/* Feature Grid */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Feature Items (Transparent with background image visible) */
+.feature-item {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    opacity: 0; /* Initially hidden */
+    transform: translateY(20px); /* Slight initial offset */
+    animation: fadeIn 1.5s ease-out forwards; /* Apply fade-in animation */
+    visibility: hidden; /* Hidden until animation starts */
+}
+
+/* Feature Item Visibility */
+.feature-item.visible {
+    visibility: visible; /* Make visible when class is added */
+}
+
+/* Additional Styles for Feature Items */
+.feature-item h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.feature-item p {
+    font-size: 1rem;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 3rem 2rem;
+    border-top: 2px solid #444;
+    font-size: 1rem;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-newsletter {
+    text-align: center;
+}
+
+.footer-newsletter h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-newsletter p {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 1.5rem;
+}
+
+.btn-subscribe {
+    background-color: #000000;
+    color: #c5c5c5;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-subscribe:hover {
+    background-color: #494949;
+}
+
+.footer-columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    text-align: left;
+}
+
+.footer-column h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-column a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+    color: #ececec;
+}
+
+.footer-bottom {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-columns {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .footer-column {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 2rem 1rem;
+    }
+
+    .btn-subscribe {
+        width: 100%;
+    }
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    .oval-container {
+        position: static;
+        transform: none;
+        justify-content: center;
+        margin-top: 1.5rem;
+        width: 100%;
+    }
+
+    .oval-link {
+        margin: 0.5rem;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .features h1 {
+        font-size: 2rem;
+    }
+
+    .feature-item h2 {
+        font-size: 1.5rem;
+    }
+
+    .feature-item p {
+        font-size: 0.9rem;
+    }
+}

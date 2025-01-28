@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Logger</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Header Styles */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      z-index: 1000;
+    }
+
+    header .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    header .logo:hover {
+      color: #ccc;
+    }
+
+    .oval-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50px);
+      width: 40%;
+      background-color: #000;
+      border-radius: 50px;
+      padding: 0.3rem;
+      animation: dropIn 1s ease-out forwards;
+    }
+
+    .oval-link {
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .oval-link:hover {
+      background-color: #444;
+    }
+
+    /* Transaction Form Container */
+    .container {
+      background: #292946;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      width: 90%;
+      max-width: 600px;
+      margin-top: 120px;
+      margin-bottom: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      text-align: center;
+      color: #6f85ff;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    label {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: #777;
+    }
+
+    input, select, button {
+      font-size: 1rem;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #444;
+      border-radius: 5px;
+      background: #333;
+      color: #fff;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #6f85ff;
+      box-shadow: 0 0 5px #6f85ff;
+    }
+
+    button {
+      background: linear-gradient(90deg, #6f85ff, #a56cff);
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      border: none;
+      padding: 0.8rem 2rem;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #a56cff, #6f85ff);
+    }
+
+    #message {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      z-index: 1000;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+      }
+    }
+
+    /* Footer Styles */
+footer {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 3rem 2rem;
+    border-top: 2px solid #444;
+    font-size: 1rem;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-newsletter {
+    text-align: center;
+}
+
+.footer-newsletter h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-newsletter p {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 1.5rem;
+}
+
+.btn-subscribe {
+    background-color: #000000;
+    color: #c5c5c5;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-subscribe:hover {
+    background-color: #494949;
+}
+
+.footer-columns {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    text-align: left;
+}
+
+.footer-column h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-column a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+    color: #ececec;
+}
+
+.footer-bottom {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-columns {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .footer-column {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 2rem 1rem;
+    }
+
+    .btn-subscribe {
+        width: 100%;
+    }
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    .oval-container {
+        position: static;
+        transform: none;
+        justify-content: center;
+        margin-top: 1.5rem;
+        width: 100%;
+    }
+
+    .oval-link {
+        margin: 0.5rem;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .features h1 {
+        font-size: 2rem;
+    }
+
+    .feature-item h2 {
+        font-size: 1.5rem;
+    }
+
+    .feature-item p {
+        font-size: 0.9rem;
+    }
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="top-icons">
+      <a href="index.html" class="logo">FinAI</a>
+    </div>
+    <div class="oval-container">
+      <a href="about.html" class="oval-link">About</a>
+      <a href="features.html" class="oval-link">Features</a>
+      <a href="community.html" class="oval-link">Community</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Transaction Logger</h1>
+    <form id="transactionForm">
+      <label for="date">Transaction Date:</label>
+      <input type="date" id="date" required>
+
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" placeholder="Enter amount" required>
+
+      <label for="description">Description:</label>
+      <input type="text" id="description" placeholder="Enter description" required>
+
+      <label for="category">Category:</label>
+      <select id="category" required>
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+        <option value="savings">Savings</option>
+      </select>
+
+      <label for="paymentMethod">Payment Method:</label>
+      <select id="paymentMethod" required>
+        <option value="cash">Cash</option>
+        <option value="credit_card">Credit Card</option>
+        <option value="bank_transfer">Bank Transfer</option>
+      </select>
+
+      <button type="submit">Save Transaction</button>
+    </form>
+
+    <div id="message"></div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="file.png" alt="FinAI Logo" class="footer-logo-img">
+        <span class="footer-logo-text">FinAI</span>
+      </div>
+      <div class="footer-description">
+        <p>FinAI is your AI-powered financial assistant. Our mission is to help individuals and businesses manage finances with ease, transparency, and precision.</p>
+      </div>
+      <div class="footer-social">
+        <p>Follow Us:</p>
+        <div class="footer-social-links">
+          <a href="#" target="_blank"><img src="x.png" alt="Twitter"></a>
+          <a href="#" target="_blank"><img src="icons8-linkedin-50.png" alt="LinkedIn"></a>
+          <a href="#" target="_blank"><img src="icons8-github-50.png" alt="GitHub"></a>
+        </div>
+      </div>
+    </div>
+    <p>&copy; 2025 FinAI. All Rights Reserved.</p>
+  </footer>
+
+  <script src="logger.js"></script>
+
+</body>
+</html>
